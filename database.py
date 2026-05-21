@@ -1,19 +1,15 @@
 import sqlite3
 import os
 
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))   # ✅ SAME PATH ALWAYS
-DB_NAME = os.path.join(BASE_DIR, "dc.db")
-
-#def get_connection():
-  #  return sqlite3.connect(DB_NAME)
+DB_NAME = "dc.db"
 
 def get_connection():
-    db_path = os.path.abspath("dc.db")
-    print("DB PATH USED:", db_path)
-    return sqlite3.connect(db_path)
+    conn = sqlite3.connect(DB_NAME, check_same_thread=False)
+    return conn
 
 def create_table():
     conn = get_connection()
+
     cursor = conn.cursor()
 
     cursor.execute("""
@@ -28,3 +24,5 @@ def create_table():
 
     conn.commit()
     conn.close()
+
+    print("✅ Table created successfully")
