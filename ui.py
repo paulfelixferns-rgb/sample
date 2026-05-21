@@ -6,8 +6,6 @@ import os
 # 🔥 FIX PROXY ISSUE
 os.environ["NO_PROXY"] = "127.0.0.1,localhost"
 
-#API = "http://127.0.0.1:8000"
-#API = "https://your-api-url.onrender.com"
 API = "https://dc-mis-api4.onrender.com"
 st.set_page_config(page_title="DC MIS Dashboard", layout="wide")
 
@@ -63,7 +61,13 @@ if not st.session_state.logged_in:
 # =========================
 def load_data():
     try:
-        res = requests.get(f"{API}/dc/data", proxies={})
+        res = requests.get(
+            f"{API}/dc/data",
+            proxies={},
+            verify=False,
+            timeout=30
+        )
+
         if res.status_code == 200:
             df = pd.DataFrame(res.json())
 
@@ -79,11 +83,13 @@ def load_data():
 
             return df
 
+        st.error(f"API Error: {res.status_code}")
         return pd.DataFrame()
 
     except Exception as e:
-        st.error(f"API Error: {e}")
+        st.error(f"Connection Error: {e}")
         return pd.DataFrame()
+
 
 # =========================
 # 📊 DASHBOARD (ADVANCED)
