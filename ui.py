@@ -7,8 +7,8 @@ import os
 os.environ["NO_PROXY"] = "127.0.0.1,localhost"
 
 #API = "http://127.0.0.1:8000"
-API = "https://your-api-url.onrender.com"
-
+#API = "https://your-api-url.onrender.com"
+API = "https://dc-mis-api4.onrender.com"
 st.set_page_config(page_title="DC MIS Dashboard", layout="wide")
 
 st.sidebar.title("📊 DC MIS Dashboard")
