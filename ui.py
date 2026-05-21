@@ -4,7 +4,7 @@ import requests
 import os
 
 # 🔥 FIX PROXY ISSUE
-os.environ["NO_PROXY"] = "127.0.0.1,localhost"
+os.environ["NO_PROXY"] = "*"
 
 API = "https://dc-mis-api4.onrender.com"
 st.set_page_config(page_title="DC MIS Dashboard", layout="wide")
